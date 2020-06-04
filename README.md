@@ -2,7 +2,7 @@
 
 Este repositório é baseado na documentação: [Build a Node.js and React app with npm](https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/)
 
-![alt tag](https://github.com/fiapsecdevops/jenkins-tutorial/raw/master/img-src/jenkins.png)
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/jenkins.png)
 
 O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
@@ -52,7 +52,7 @@ docker logs jenkins-tutorial
 
 3.1.1 A informação que aparece ao final da tela no formato de chave no campo com a descrição "Please use the following password to proceed to installation" será utilizada para desboquear o CI, para isso acesse a URL do servidor na porta 80 e coloque a chave obtida:
 
-![alt tag](https://github.com/fiapsecdevops/jenkins-tutorial/raw/master/img-src/01.PNG)
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/01.PNG)
 
 3.2 Depois de [desbloquear o Jenkins](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#unlocking-jenkins), a página **Customize Jenkins** será exibida
 
@@ -84,7 +84,7 @@ docker logs jenkins-tutorial
 
 4.6 No campo SCM, escolha Git.
 
-4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/fiapsecdevops/jenkins-tutorial.git
+4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/fiapfullstack/pipelines.git
 
 **Importante:** Tome o cuidado de utilizar o seu repositório para que tenha o acesso necessário para fazer alterações no futuro!
 
@@ -149,11 +149,11 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 6.1 Após verificarmos a esturtura por trás do pipeline faremos a primeira execução utilizando o plugin blue ocean, para isso volte para Jenkins novamente, faça login se necessário e clique em **"Open Blue Ocean"** no painél à esquerda para acessar a interface do plugin., nesta interface você provavelmente verá uma mensagem **"This job has not been run"**, clique em **"Run"**:
 
-![alt tag](https://github.com/fiapsecdevops/jenkins-tutorial/raw/master/img-src/02.PNG)
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/02.PNG)
 
 6.2 Em seguida, clique rapidamente no link **"OPEN"** que aparece brevemente no canto inferior direito para ver Jenkins construindo seu projeto:
 
-![alt tag](https://github.com/fiapsecdevops/jenkins-tutorial/raw/master/img-src/03.PNG)
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/03.PNG)
 
 6.3 Se não foi possível clicar no link, clique na linha que aparece interface principal do Blue Ocean para acessar esse recurso.
 
@@ -163,7 +163,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 6.4 Ao final da execução a primeira versão do pipeline estará completa:
 
-![alt tag](https://github.com/fiapsecdevops/jenkins-tutorial/raw/master/img-src/04.PNG)
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/04.PNG)
 
 ---
 
