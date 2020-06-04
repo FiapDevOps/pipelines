@@ -15,6 +15,7 @@ verificar se o aplicativo é renderizado conforme esperado crianda nosso primeir
 5. [Sessões](#Sessões)
 6. [Running](#Running)
 7. [Test](#Test)
+8. [Delivery](#Delivery)
 
 ---
 
@@ -143,7 +144,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 ---
 
-## Running <a name="Running!"></a> 
+## Running <a name="Running"></a> 
 
 **Execute o primeiro pipeline do laboratório**
 
@@ -219,3 +220,73 @@ pipeline {
     }
 }
 ```
+
+---
+
+## Delivery <a name="Delivery"></a> 
+
+**"Adicionando uma etapa final para entrega"**
+
+8.1 Abre novamente o arquivo Jenkinsfile para edição e adicione um novo estágio:
+
+```sh
+       stage('Deliver') {
+            steps {
+                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'chmod +x ./jenkins/scripts/kill.sh'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
+```
+
+Esta etapa será responsável por acionar um script de entrega da aplicação em um ambiente temporário.
+
+> O input ao final é naturalmente opicional e adiciona apenas uma etapa de pausa para facilitar a verificação do fluxo antes que o pipeline seja totalmente finalizado e apresenta uma das várias possibilidades para integrações em casos onde o objetivo é o delivery contínuo com alguma decisão manual antes ou depois da entrega;
+
+8.2 Verifique o modelo final do Jenkinsfile:
+
+```sh
+pipeline {
+    agent {
+        docker {
+            image 'node:12-alpine'
+            args '-p 3000:3000'
+        }
+    }
+    environment { 
+        CI = 'true'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Deliver') { 
+            steps {
+                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'chmod +x ./jenkins/scripts/kill.sh'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
+    }
+}
+```
+
+8.3 Durante a entrega, enquanto não clicarmos na opção Proceed a página ficará acessível na URL do CI na porta 3000;
+
+---
+
+##### Fiap - MBA Full Stack Developer | DevOps
+profhelder.pereira@fiap.com.br
+
+**Free Software, Hell Yeah!**
