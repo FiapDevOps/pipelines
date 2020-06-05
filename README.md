@@ -4,6 +4,8 @@ Este repositório é baseado na documentação: [Build a Node.js and React app w
 
 ![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/jenkins.png)
 
+**Parte 1**
+
 O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
@@ -16,6 +18,13 @@ verificar se o aplicativo é renderizado conforme esperado crianda nosso primeir
 6. [Running](#Running)
 7. [Test](#Test)
 8. [Delivery](#Delivery)
+
+---
+
+
+**Parte 2**
+
+[Integração com o Repo (GitHub Flow)](https://github.com/FiapFullStack/pipelines/blob/master/flows/GITHUBFLOW.md)
 
 ---
 
