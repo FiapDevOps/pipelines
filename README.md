@@ -187,6 +187,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 ```sh
         stage('Test') {
             steps {
+                sh 'chmod +x ./jenkins/scripts/test.sh'                        
                 sh './jenkins/scripts/test.sh'
             }
         }
@@ -232,10 +233,9 @@ pipeline {
 ```sh
        stage('Deliver') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
             }
         }
@@ -272,10 +272,9 @@ pipeline {
         }
         stage('Deliver') { 
             steps {
-                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
             }
         }
