@@ -6,6 +6,7 @@ services:
     image: docker:dind
     ports:
       - "3000:3000"
+      - "5000:5000"
     privileged: true
     volumes:
        - jenkins-docker-certs:/certs/client
