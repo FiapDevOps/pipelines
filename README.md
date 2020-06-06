@@ -558,6 +558,8 @@ git push
 
 11.6 Ao final do processo acesse a página do CI na porta 3000 para verificar a aplicação Node rodando em modo de desenvolvimento e finalize a aplicação pleo CI clicando na opção "Proceed";
 
+![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/08.PNG)
+
 11.7 Finalmente faça um novo teste iniciando o Job a partir da branch "Production";
 
 ---
