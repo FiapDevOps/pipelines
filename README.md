@@ -97,7 +97,7 @@ Esta opção instrui Jenkins a obter seu Pipeline do Source Control Management (
 
 4.6 No campo SCM, escolha Git.
 
-4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/FiapDevOps/mba_fullstack.git
+4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/fiapdevops/pipelines.git
 
 **Importante:** Tome o cuidado de utilizar o seu repositório para que tenha o acesso necessário para fazer alterações no futuro envolvendo credenciais para execução de webhooks;
 
