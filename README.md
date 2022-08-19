@@ -46,7 +46,7 @@ Utilizaremos a arquitetura baseada em containers para instanciar a primeira vers
 2.2 Acesse o servidor disponibilizado para o laboratório e caso ainda não esteja disponível execute um clone deste repositório, em seguida inicie o stack do Jenkins a partir da raiz do projeto
 
 ```sh
-docker-compose up
+docker-compose up -d
 ```
 
 [![asciicast](https://asciinema.org/a/335882.svg)](https://asciinema.org/a/335882)
@@ -60,7 +60,7 @@ docker-compose up
 Obs.: Se estiver utilizando um segundo terminal ou iniciou o container em background será possível recuperar as credenciais utilizando o comando abaixo:
 
 ```sh
-docker logs jenkins-tutorial
+docker logs jenkins-blueocean
 ```
 
 3.1.1 A informação que aparece ao final da tela no formato de chave no campo com a descrição "Please use the following password to proceed to installation" será utilizada para desboquear o CI, para isso acesse a URL do servidor na porta 80 e coloque a chave obtida:
@@ -85,21 +85,23 @@ docker logs jenkins-tutorial
 
 4.1 Crie seu projeto de pipeline no Jenkins, para isso na página **"Welcome to Jenkins!"** clique em criar **"Create New Job"**
 
-4.2 No campo que surgir digite um nome para o seu novo projeto de Pipeline (por exemplo, scj-simple-js-react-app).
+4.2 No campo que surgir digite um nome para o seu novo projeto de Pipeline (por exemplo, simple-node-js-react-npm-app).
 
 4.3 Em seguida logo abaixo escolha a opção **"Pipeline"**, depois clique em OK no final da página.
 
-> (Opcional) Na página seguinte, especifique uma breve descrição para o seu Pipeline no campo Descrição (por exemplo, um Pipeline de entrada demonstrando como usar o Jenkins para criar um aplicativo Node.js na mba =} )
-
 4.4 Na parte superior da página clique na Guia Pipeline para rolar até a sessão de configuração do nosso Pipeline;
 
-4.5 No campo **"Definition"**, escolha a opção Script de pipeline no SCM. Esta opção instrui Jenkins a obter seu Pipeline do Source Control Management (SCM), que será seu repositório Git clonado localmente, **essa será nossa primeira ação prática rumo a integração contínua;**
+4.5 No campo **"Definition"**, escolha a opção Pipeline script from SCM. 
+
+Esta opção instrui Jenkins a obter seu Pipeline do Source Control Management (SCM), que será seu repositório Git clonado localmente, **essa será nossa primeira ação prática rumo a integração contínua;**
 
 4.6 No campo SCM, escolha Git.
 
-4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/fiapfullstack/pipelines.git
+4.7 No campo URL do Repositório, especifique o repositório clonado, por exemplo: https://github.com/FiapDevOps/mba_fullstack.git
 
-**Importante:** Tome o cuidado de utilizar o seu repositório para que tenha o acesso necessário para fazer alterações no futuro!
+**Importante:** Tome o cuidado de utilizar o seu repositório para que tenha o acesso necessário para fazer alterações no futuro envolvendo credenciais para execução de webhooks;
+
+4.8 Ao final da tela no campo "Script Path" utilize a path **pipelines/Jenkinsfile** indicando o Jenkinsfile dentro do diretório pipelines;
 
 4.8 Clique em Salvar para salvar seu novo Pipeline. Agora você está pronto para começar a criar seu [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/);
 
@@ -124,9 +126,12 @@ O conteúdo base necessário para o nosso primeiro pipeline está na raiz do rep
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine' 
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000' 
         }
+    }
+    environment {
+        CI = 'true' 
     }
     stages {
         stage('Build') { 
@@ -211,7 +216,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000'
         }
     }
@@ -240,7 +245,7 @@ pipeline {
 
 **"Adicionando uma etapa final para entrega"**
 
-8.1 Abre novamente o arquivo Jenkinsfile para edição e adicione um novo estágio:
+8.1 Abra novamente o arquivo Jenkinsfile para edição e adicione um novo estágio:
 
 ```sh
        stage('Deliver') {
@@ -263,7 +268,7 @@ Esta etapa será responsável por acionar um script de entrega da aplicação em
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000'
         }
     }
@@ -339,7 +344,7 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 ```sh
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }
@@ -378,7 +383,7 @@ No modelo de multiplas branchs a alteração permitirá criar um estágio cuja e
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }
@@ -494,7 +499,7 @@ echo '(This is why you specified the "args ''-p 5000:5000''" parameter)'
 pipeline {
     agent {
         docker {
-            image 'node:12-alpine'
+            image 'node:lts-bullseye-slim' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }

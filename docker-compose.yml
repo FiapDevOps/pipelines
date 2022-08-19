@@ -20,11 +20,12 @@ services:
           aliases:
              - docker
 
-  jenkins-tutorial:
-    container_name: jenkins-tutorial
-    image: jenkinsci/blueocean
+  jenkins-blueocean:
+    container_name: jenkins-blueocean
+    image: myjenkins-blueocean:2.346.3-1
     ports:
       - "80:8080"
+      - "50000:50000"
     volumes:
        - jenkins-docker-certs:/certs/client:ro
        - jenkins-data:/var/jenkins_home
@@ -34,6 +35,7 @@ services:
        DOCKER_HOST: tcp://docker:2376
        DOCKER_CERT_PATH: /certs/client
        DOCKER_TLS_VERIFY: 1
+       JAVA_OPTS: "-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true"
     networks:
        jenkins:
 
