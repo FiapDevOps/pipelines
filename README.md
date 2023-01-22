@@ -31,13 +31,17 @@ verificar se o aplicativo é renderizado conforme esperado crianda nosso primeir
 
 ---
 
-## Requisitos  <a name="Requisitos"></a>
+## Requisitos <a name="Requisitos"></a>
 
 Utilizaremos a arquitetura baseada em containers para instanciar a primeira versão do Jenkins e demonstrar a configuração de um pipeline utilizando o plugin Blue Ocean, este laboratório é baseado na documentação [Build a Node.js and React app with npm ](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#setup-wizard);
 
 1.1 Instalação do Docker CE: Para execução deste laboratório é necessário a instalação do serviço docker, existem versões para Windows, Linux e Mac, a documentação de apoio está disponível neste endereço: [Install Docker Engine](https://docs.docker.com/engine/install/);
 
 1.2 Instalação do Docker Compose, embora não seja um pré-requisito a infraestrutura de containers construida na documentação foi automatizada para este laboratório utilizando [Overview of Docker Compose](https://docs.docker.com/compose/) este recurso automatiza algumas etapas da configuração com a inicialização dos dcontainers e configuração de rede e volumes, por isso para seguir o passo-a-passo abaixo sua instalação é necessária e [esta detalhada nesse documentação](https://docs.docker.com/compose/install/);
+
+## Alternativa:
+
+Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/FiapDevOps/cloud9);
 
 ## Início <a name="Início"></a>
 
