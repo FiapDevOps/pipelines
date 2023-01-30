@@ -10,17 +10,17 @@ O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
 
-01. [Requisitos](https://github.com/FiapDevOps/pipelines/edit/master/README.md#requisitos-)
-02. [Bootstrap](https://github.com/FiapDevOps/pipelines/edit/master/README.md#bootstrap-)
-03. [Desbloqueio](https://github.com/FiapDevOps/pipelines/edit/master/README.md#desbloqueio-)
-04. [Pipeline](https://github.com/FiapDevOps/pipelines/edit/master/README.md#pipeline-)
-05. [Sessões](https://github.com/FiapDevOps/pipelines/edit/master/README.md#sess%C3%B5es-)
-06. [Running](https://github.com/FiapDevOps/pipelines/edit/master/README.md#running-)
-07. [Test](https://github.com/FiapDevOps/pipelines/edit/master/README.md#test-)
-08. [Delivery](https://github.com/FiapDevOps/pipelines/edit/master/README.md#delivery-)
-09. [ProjetosMultiBranch](https://github.com/FiapDevOps/pipelines/edit/master/README.md#projetosmultibranch-)
-10. [MultiBranchPipeline](https://github.com/FiapDevOps/pipelines/edit/master/README.md#multibranchpipeline-)
-11. [MultiBranchDeploy](https://github.com/FiapDevOps/pipelines/edit/master/README.md#multibranchdeploy-)
+01. [Requisitos](https://github.com/FiapDevOps/pipelines#requisitos-)
+02. [Bootstrap](https://github.com/FiapDevOps/pipelines#bootstrap-)
+03. [Desbloqueio](https://github.com/FiapDevOps/pipelines#desbloqueio-)
+04. [Pipeline](https://github.com/FiapDevOps/pipelines#pipeline-)
+05. [Sessões](https://github.com/FiapDevOps/pipelines#sess%C3%B5es-)
+06. [Running](https://github.com/FiapDevOps/pipelines#running-)
+07. [Test](https://github.com/FiapDevOps/pipelines#test-)
+08. [Delivery](https://github.com/FiapDevOps/pipelines#delivery-)
+09. [ProjetosMultiBranch](https://github.com/FiapDevOps/pipelines#projetosmultibranch-)
+10. [MultiBranchPipeline](https://github.com/FiapDevOps/pipelines#multibranchpipeline-)
+11. [MultiBranchDeploy](https://github.com/FiapDevOps/pipelines#multibranchdeploy-)
 
 ---
 
