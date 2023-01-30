@@ -41,7 +41,7 @@ Utilizaremos a arquitetura baseada em containers para instanciar a primeira vers
 
 ## Alternativa:
 
-Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/FiapDevOps/cloud9);
+Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/fiapdevops/pipelines/cloud9);
 
 ## Início <a name="Início"></a>
 

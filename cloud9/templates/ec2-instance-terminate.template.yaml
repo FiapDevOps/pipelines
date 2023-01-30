@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS Lifecycle Instances function
+
+Parameters:
+
+  Region:
+    Default: us-east-1 
+    Description: region only 1 region supported 
+    Type: String
+
+  TerminateScheduled:
+    Default: cron(0 5 * * ? *)
+    Description: enter an Schedule expression example cron(0 18 ? * MON-FRI *) see https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    Type: String
+
+
+Resources:
+
+  TerminateEC2Instances:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.8
+      Role: !GetAtt Role.Arn
+      Handler: index.lambda_handler
+      Timeout: 60
+      Environment:
+         Variables:
+          Region: !Ref Region
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+
+          def lambda_handler(event, context):
+            region = os.environ['Region']
+            client = boto3.client('ec2', region_name=region)
+
+            response = client.describe_instances(
+                Filters=[
+                  {'Name': 'tag:env', 'Values': ['lab'] },
+                  {'Name': 'instance-state-name', 'Values': ['running']}
+                ],
+            )
+
+            instance_ids = list()
+
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                for reservation in response["Reservations"]:
+                  for each in reservation["Instances"]:
+                    instance_ids.append(each['InstanceId'])
+
+                if not instance_ids:
+                  print('Nothing to do here.')
+                else:
+                    try:
+                        print("instances marked to be removed: ", instance_ids)
+                        client.terminate_instances(InstanceIds = instance_ids)
+                    except Exception as e:
+                        print("Error in process: " + str(e))
+            
+            return {
+              'statusCode': 200,
+              'body': json.dumps('Terminated instances: ' + str(instance_ids))
+            }
+      Description: Function that Terminates instances
+  permissionForEventsToInvokeTerminateEC2Instances:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt TerminateEC2Instances.Arn
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      "SourceArn" : !GetAtt TerminateScheduledRule.Arn
+
+  Role:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      Policies:
+        - PolicyName: Ec2permissions
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                - "ec2:TerminateInstances"
+                - "ec2:DescribeInstances"
+                - "ec2:DescribeInstanceStatus"
+                Resource: '*'
+                
+
+  TerminateScheduledRule: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "ScheduledRule"
+      ScheduleExpression: !Ref TerminateScheduled
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: !GetAtt TerminateEC2Instances.Arn
+          Id: "TargetFunctionV1"

@@ -1,0 +1,160 @@
+# /*
+# Create a Cloud9 environment as a launcher platform to create another stuffs
+# Based on https://github.com/awslabs/aws-cloudformation-templates
+# Adapted from original file: https://github.com/awslabs/aws-cloudformation-templates/blob/master/aws/services/Cloud9/C9.yaml
+# */
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS Cloud9 Environment with AWS CodeCommit Repository
+
+Parameters:
+
+  EC2InstanceType:
+    Description: EC2 instance type on which IDE runs
+    Type:        String
+    Default:     t3.small
+    AllowedValues:
+      - t2.micro
+      - t3.small
+
+  AutoHibernateTimeout:
+    Description:  How many minutes idle before shutting down the IDE. Options, 30min, 1hr, 4hr, 1day, 1week, Never (0)
+    Type:         Number
+    Default:      240
+    AllowedValues:
+      - 30
+      - 60
+      - 240
+      - 1440
+      - 10080
+      - 0
+
+  RM:
+    Description:    Cloque o seu RM (Apenas os números), esse dado será usado em algumas Tags para facilitar a identificação.
+    Type:           String
+    Default:        "12345"
+
+  Region:
+    Default: us-west-2 
+    Description: region only 1 region supported 
+    Type: String
+  
+  TerminateScheduled:
+    Default: cron(0 5 * * ? *)
+    Description: enter an Schedule expression example cron(0 18 ? * MON-FRI *) see https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    Type: String
+
+Resources:
+
+  C9IDE:
+    Type: 'AWS::Cloud9::EnvironmentEC2'
+    Properties:
+      Name: !Sub '$rm-${RM}-Cloud9-IDE'
+      Description: !Sub '${RM} Cloud9 IDE'
+      AutomaticStopTimeMinutes: !Ref 'AutoHibernateTimeout'
+      InstanceType: !Ref 'EC2InstanceType'
+
+  TerminateEC2Instances:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.8
+      Role: !GetAtt Role.Arn
+      Handler: index.lambda_handler
+      Timeout: 60
+      Environment:
+         Variables:
+          Region: !Ref Region
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+
+          def lambda_handler(event, context):
+            region = os.environ['Region']
+            client = boto3.client('ec2', region_name=region)
+
+            response = client.describe_instances(
+                Filters=[
+                  {'Name': 'tag:env', 'Values': ['lab'] },
+                  {'Name': 'instance-state-name', 'Values': ['running']}
+                ],
+            )
+
+            instance_ids = list()
+
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                for reservation in response["Reservations"]:
+                  for each in reservation["Instances"]:
+                    instance_ids.append(each['InstanceId'])
+
+                if not instance_ids:
+                  print('Nothing to do here.')
+                else:
+                    try:
+                        print("instances marked to be removed: ", instance_ids)
+                        client.terminate_instances(InstanceIds = instance_ids)
+                    except Exception as e:
+                        print("Error in process: " + str(e))
+            
+            return {
+              'statusCode': 200,
+              'body': json.dumps('Terminated instances: ' + str(instance_ids))
+            }
+      Description: Function that Terminates instances
+  permissionForEventsToInvokeTerminateEC2Instances:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt TerminateEC2Instances.Arn
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      "SourceArn" : !GetAtt TerminateScheduledRule.Arn
+
+  Role:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      Policies:
+        - PolicyName: Ec2permissions
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                - "ec2:TerminateInstances"
+                - "ec2:DescribeInstances"
+                - "ec2:DescribeInstanceStatus"
+                Resource: '*'
+                
+
+  TerminateScheduledRule: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "ScheduledRule"
+      ScheduleExpression: !Ref TerminateScheduled
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: !GetAtt TerminateEC2Instances.Arn
+          Id: "TargetFunctionV1"
+
+Outputs:
+
+  Cloud9URL:
+    Description: Cloud9 Environment
+    Value:
+      Fn::Join:
+      - ''
+      - - !Sub https://${AWS::Region}.console.aws.amazon.com/cloud9/ide/
+        - !Ref 'C9IDE'
