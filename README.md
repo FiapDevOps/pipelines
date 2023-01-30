@@ -10,17 +10,17 @@ O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
 
-01. [Requisitos](#Requisitos)
-02. [Início](#Início)
-03. [Desbloqueio](#Desbloqueio)
-04. [Pipeline](#Pipeline)
-05. [Sessões](#Sessões)
-06. [Running](#Running)
-07. [Test](#Test)
-08. [Delivery](#Delivery)
-09. [ProjetosMultiBranch](#ProjetosMultiBranch)
-10. [MultiBranchPipeline](#MultiBranchPipeline)
-11. [MultiBranchDeploy](#MultiBranchDeploy)
+01. [Requisitos](https://github.com/FiapDevOps/pipelines/edit/master/README.md#requisitos-)
+02. [Bootstrap](https://github.com/FiapDevOps/pipelines/edit/master/README.md#bootstrap-)
+03. [Desbloqueio](https://github.com/FiapDevOps/pipelines/edit/master/README.md#desbloqueio-)
+04. [Pipeline](https://github.com/FiapDevOps/pipelines/edit/master/README.md#pipeline-)
+05. [Sessões](https://github.com/FiapDevOps/pipelines/edit/master/README.md#sess%C3%B5es-)
+06. [Running](https://github.com/FiapDevOps/pipelines/edit/master/README.md#running-)
+07. [Test](https://github.com/FiapDevOps/pipelines/edit/master/README.md#test-)
+08. [Delivery](https://github.com/FiapDevOps/pipelines/edit/master/README.md#delivery-)
+09. [ProjetosMultiBranch](https://github.com/FiapDevOps/pipelines/edit/master/README.md#projetosmultibranch-)
+10. [MultiBranchPipeline](https://github.com/FiapDevOps/pipelines/edit/master/README.md#multibranchpipeline-)
+11. [MultiBranchDeploy](https://github.com/FiapDevOps/pipelines/edit/master/README.md#multibranchdeploy-)
 
 ---
 
@@ -43,7 +43,7 @@ Utilizaremos a arquitetura baseada em containers para instanciar a primeira vers
 
 Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/FiapDevOps/cloud9);
 
-## Início <a name="Início"></a>
+## Bootstrap <a name="Bootstrap"></a>
 
 2.1 Como executarmeos algumas alterações durante o laboratório é necessário que você execute um [Fork deste repositório](https://help.github.com/pt/github/getting-started-with-github/fork-a-repo) para sua conta local no GitHub, utilize um repositório aberto para evitar a configurações de credenciais de acesso no CI.
 
