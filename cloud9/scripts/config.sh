@@ -34,7 +34,7 @@ echo "export AWS_REGION=$(curl --silent http://169.254.169.254/latest/dynamic/in
 echo "export ANSIBLE_HOST_KEY_CHECKING=False" >> $HOME/.bashrc
 }
 
-configure_keys () {
+configure_access () {
 
 printf "Criando chave\n"
 
@@ -50,22 +50,25 @@ aws ec2 describe-security-groups --filters Name=group-name,Values=*aws-cloud9* -
 # Definindo o SECURITY GROUP atual
 CURRENT_SG=$(aws ec2 describe-security-groups --filters Name=group-name,Values=*aws-cloud9* --query "SecurityGroups[*].[GroupId]" --output text)
 
+# Autorizando acessos
 for GROUP_ID in $(aws ec2 describe-security-groups --filters Name=group-name,Values=default --query "SecurityGroups[*].[GroupId]" --output text)
 do
 aws ec2 authorize-security-group-ingress --group-id $GROUP_ID --protocol tcp --port 0-65535 --source-group $CURRENT_SG
 aws ec2 authorize-security-group-ingress --group-id $GROUP_ID --protocol icmp --port -1 --source-group $CURRENT_SG
 aws ec2 authorize-security-group-ingress --group-id $GROUP_ID --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $GROUP_ID --protocol tcp --port 443 --cidr 0.0.0.0/0
-
 done
 
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 443 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 8080 --cidr 0.0.0.0/0
 }
 
 # ==============================================================================================================================
 
 resize
 configure_deps
-configure_keys
+configure_access
 
 printf "\n Configurando Enviroment Env \n"
 bash
