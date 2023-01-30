@@ -24,8 +24,8 @@ cd ~/environment
 git clone https://github.com/fiapdevops/pipelines
 
 # Execute o script de instalção das ferramentas que serão usadas durante os laboratórios:
-chmod +x ~/environment/fiapdevops/pipelines/cloud9/scripts/*.sh
-~/environment/fiapdevops/pipelines/cloud9/scripts/config.sh
+chmod +x ~/environment/pipelines/cloud9/scripts/*.sh
+~/environment/pipelines/cloud9/scripts/config.sh
 ```
 
 ---
