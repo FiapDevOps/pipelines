@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:lts-bullseye-slim' 
-            args '-p 65001:65001'
+            args '-p 80:80'
         }
     }
     environment { 
