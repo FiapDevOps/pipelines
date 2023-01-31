@@ -130,7 +130,7 @@ O conteúdo base necessário para o nosso primeiro pipeline está na raiz do rep
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000' 
         }
     }
@@ -208,7 +208,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 ```sh
         stage('Test') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/test.sh'                        
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/test.sh'
             }
         }
@@ -220,7 +220,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000'
         }
     }
@@ -235,7 +235,7 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                sh 'chmod +x ./jenkins/scripts/test.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/test.sh' 
             }
         }
@@ -272,7 +272,7 @@ Esta etapa será responsável por acionar um script de entrega da aplicação em
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000'
         }
     }
@@ -287,7 +287,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/test.sh'            
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/test.sh'
             }
         }
@@ -348,7 +348,7 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 ```sh
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }
@@ -367,10 +367,9 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
                 branch 'development'
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
             }
         }
@@ -387,7 +386,7 @@ No modelo de multiplas branchs a alteração permitirá criar um estágio cuja e
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }
@@ -402,7 +401,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/test.sh'            
+                sh 'chmod -R +x ./jenkins/scripts'            
                 sh './jenkins/scripts/test.sh'
             }
         }
@@ -411,10 +410,9 @@ pipeline {
                 branch 'development'
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'
             }
         }        
@@ -488,10 +486,9 @@ echo '(This is why you specified the "args ''-p 5000:5000''" parameter)'
                 branch 'production'
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deployment.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deployment.sh'
                 input message: 'Finished with your production version? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'                
             }
         } 
@@ -503,7 +500,7 @@ echo '(This is why you specified the "args ''-p 5000:5000''" parameter)'
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:12-alpine' 
             args '-p 3000:3000 -p 5000:5000'
         }
     }
@@ -518,7 +515,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/test.sh'            
+                sh 'chmod -R +x ./jenkins/scripts'            
                 sh './jenkins/scripts/test.sh'
             }
         }
@@ -538,10 +535,9 @@ pipeline {
                 branch 'production'
             }
             steps {
-                sh 'chmod +x ./jenkins/scripts/deployment.sh'
+                sh 'chmod -R +x ./jenkins/scripts'
                 sh './jenkins/scripts/deployment.sh'
                 input message: 'Finished with your production version? (Click "Proceed" to continue)'
-                sh 'chmod +x ./jenkins/scripts/kill.sh'
                 sh './jenkins/scripts/kill.sh'                
             }
         }        
