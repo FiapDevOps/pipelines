@@ -36,11 +36,6 @@ echo "export ANSIBLE_HOST_KEY_CHECKING=False" >> $HOME/.bashrc
 
 configure_access () {
 
-printf "Criando chave\n"
-
-test -f $HOME/environment/info/id_lab.pem || aws ec2 create-key-pair --key-name id_lab --key-type rsa | jq -r ".KeyMaterial" > $HOME/environment/info/id_lab.pem && chmod 600 $HOME/environment/info/id* | cp -p $HOME/environment/info/id_lab.pem $HOME/.ssh/id_rsa 
-test -f $HOME/environment/info/id_lab.pub || ssh-keygen -y -f $HOME/environment/info/id_lab.pem > $HOME/environment/info/id_lab.pub && chmod 600 $HOME/.ssh/id_rsa
-
 export PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 export PUBLIC_DNS=$(curl -s http://169.254.169.254/latest/meta-data/public-hostname)
 
@@ -62,6 +57,9 @@ done
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 443 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 8080 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 3000 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 5000 --cidr 0.0.0.0/0
+
 }
 
 # ==============================================================================================================================
