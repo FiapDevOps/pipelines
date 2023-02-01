@@ -87,7 +87,7 @@ docker logs jenkins-blueocean
 
 **Criando o projeto e a integração**
 
-4.1 Crie seu projeto de pipeline no Jenkins, para isso na página **"Welcome to Jenkins!"** clique em criar **"Create New Job"**
+4.1 Crie seu projeto de pipeline no Jenkins, para isso na página **"Welcome to Jenkins!"** clique em criar **"Create a Job"**
 
 4.2 No campo que surgir digite um nome para o seu novo projeto de Pipeline (por exemplo, simple-node-js-react-npm-app).
 
@@ -316,20 +316,18 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 
 ## ProjetosMultiBranch <a name="ProjetosMultiBranch"></a>
 
-**Crie o seu pipeline utilizando o Blue Ocean**
+9.3 A partir da interface do Jenkins clique em **'Open Blue Ocean'** no painel a esquerda;
 
-9.3 Após a criação das branchs volte a solução de CI, clique em **'Open Blue Ocean'** no painel a esquerda;
-
-9.4 Na sessão **'Welcome to Jenkins'**, no centro da interface do Blue Ocean, clique em **'Create a new Pipeline'** para iniciar o assistente;
+9.4 No menu no topo da página clique em **'Pipelines'**, e no menu logo abaixo clique em **'New Pipeline'** para iniciar o assistente;
 
 9.5 Na opção **'Where do you store your code?'** selecione **'Git'** (Não utilize a opção GitHub);
 
 ![alt tag](https://github.com/fiapfullstack/pipelines/raw/main/img-src/05.PNG)
 
 
-9.6 No campo **'Repository URL'**, especifique o repositório remoto na sua conta Git;
+9.6 No campo **'Repository URL'**, especifique o repositório remoto na sua conta Git, mantenha os campos Username e Password em branco, 
 
-9.7 Clique em **'Save'** ao finalizar o processo;
+9.7 Clique em **'Create Pipeline'** ao finalizar o processo;
 
 9.8 Por padrão ao criar pipelines utilizando o blue ocean ele automaticamente interpreta que o modelo de implantação pode ser executado com multiplas branchs, isso ocorrerá a partir da existência de novas branchs com arquivos de Jenkinsfile;
 
@@ -478,9 +476,18 @@ echo 'Visit http://localhost:5000 to see your Node.js/React application in actio
 echo '(This is why you specified the "args ''-p 5000:5000''" parameter)'
 ```
 
-11.2 Além da alteração anterior adicione um segundo estágio que será utilizado para a entrega em produção, essa configuração será aplicada a branch main e em seguida adicionaremos o mesmo conteúdo nas branchs development e production
+11.2 Além da alteração anterior adicione um segundo estágio que será utilizado para a entrega em produção e configure o uso da porta 5000 para expor a app, essa configuração será aplicada a branch main e em seguida adicionaremos o mesmo conteúdo nas branchs development e production
 
 ```sh
+
+    agent {
+        docker {
+            image 'node:12-alpine' 
+            args '-p 3000:3000 -p 5000:5000'
+        }
+    }
+
+...
         stage('Deploy for production') {
             when {
                 branch 'production'
@@ -550,14 +557,14 @@ pipeline {
 11.4 Voltando ao repositório Git faça atualize os arquivos Jenkinfile de acordo com as mudanças que executamos no arquivo disponível no repositório principal.
 
 ```sh
-git checkout development
-git merge main
-#
-git checkout production
+git checkout main
+git checkout -b development
 git push
 ```
 
-11.5 Testando o modelo completo, nesta etapa execute o job na branch de desenvolvimento:
+11.5 Testando o modelo completo, utilize o botão localizado a esquerda da opção logout menu no canto superior direito da tela para voltar a interface do Jenkins, em seguida clique sobre o Pipeline e clique no botão **Scan Multibranch Pipeline Now**.
+
+Em segundos o CI identificará a branch development e iniciará um novo Job.
 
 > Como você está construindo a aplicação em uma branch diferente, a etapa de instalação do npm exigirá alguns minutos para que o npm faça o download das dependências necessárias para executar o  Node.js e React;
 
