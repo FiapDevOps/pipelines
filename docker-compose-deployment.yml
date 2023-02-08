@@ -1,0 +1,29 @@
+## Please run npm i --package-lock-only to generate lock file before start
+services:
+  frontend:
+    build:
+      context: .
+    container_name: frontend
+    ports:
+      - "8080:80"
+    networks:
+       myapp-net:
+          aliases:
+             - frontend
+
+  backend:
+    build:
+      context: ./server
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+    networks:
+       myapp-net:
+          aliases:
+             - backend
+
+networks:
+  myapp-net:
+     name: myapp-net
