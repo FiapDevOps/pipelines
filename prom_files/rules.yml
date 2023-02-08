@@ -1,0 +1,10 @@
+groups:
+  - name: default
+    rules:
+      - alert: BackendDown
+        expr:  up{job="backend"} != 1
+        for: 1m
+        labels:
+          severity: high
+        annotations:
+          summary: Our app is not responding, please check it

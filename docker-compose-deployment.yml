@@ -24,6 +24,39 @@ services:
           aliases:
              - backend
 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.35.0
+    volumes:
+      - prometheus_data:/prometheus
+      - .prom_files/prometheus.yml:/etc/prometheus/prometheus.yml
+      - .prom_files/rules.yml:/etc/prometheus/rules.yml
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    networks:
+       myapp-net:
+
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter:v1.3.1
+    ports:
+      - 9100:9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+       myapp-net:
+
 networks:
   myapp-net:
      name: myapp-net
+     
+volumes:
+    prometheus_data: {}
