@@ -59,6 +59,7 @@ aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp -
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 8080 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 3000 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 5000 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $CURRENT_SG --protocol tcp --port 9090 --cidr 0.0.0.0/0
 
 }
 
