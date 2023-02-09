@@ -2,7 +2,7 @@
 
 Este repositório é baseado na documentação: [Build a Node.js and React app with npm](https://jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/)
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/jenkins.png)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/jenkins.png)
 
 **Parte 1**
 
@@ -69,7 +69,7 @@ docker logs jenkins-blueocean
 
 3.1.1 A informação que aparece ao final da tela no formato de chave no campo com a descrição "Please use the following password to proceed to installation" será utilizada para desboquear o CI, para isso acesse a URL do servidor na porta 80 e coloque a chave obtida:
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/01.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/01.PNG)
 
 3.2 Depois de [desbloquear o Jenkins](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#unlocking-jenkins), a página **Customize Jenkins** será exibida
 
@@ -171,11 +171,11 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 6.1 Após verificarmos a esturtura por trás do pipeline faremos a primeira execução utilizando o plugin blue ocean, para isso volte para Jenkins novamente, faça login se necessário e clique em **"Open Blue Ocean"** no painél à esquerda para acessar a interface do plugin., nesta interface você provavelmente verá uma mensagem **"This job has not been run"**, clique em **"Run"**:
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/02.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/02.PNG)
 
 6.2 Em seguida, clique rapidamente no link **"OPEN"** que aparece brevemente no canto inferior direito para ver Jenkins construindo seu projeto:
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/03.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/03.PNG)
 
 6.3 Se não foi possível clicar no link, clique na linha que aparece interface principal do Blue Ocean para acessar esse recurso.
 
@@ -185,7 +185,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 6.4 Ao final da execução a primeira versão do pipeline estará completa:
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/04.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/04.PNG)
 
 ---
 
@@ -324,7 +324,7 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 
 9.5 Na opção **'Where do you store your code?'** selecione **'Git'** (Não utilize a opção GitHub);
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/05.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/05.PNG)
 
 
 9.6 No campo **'Repository URL'**, especifique o repositório remoto na sua conta Git;
@@ -333,7 +333,7 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 
 9.8 Por padrão ao criar pipelines utilizando o blue ocean ele automaticamente interpreta que o modelo de implantação pode ser executado com multiplas branchs, isso ocorrerá a partir da existência de novas branchs com arquivos de Jenkinsfile;
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/05.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/05.PNG)
 
 > Se for necessário excluir uma branch do fluxo basta que ela não possua um arquivo Jenkinsfile ou que ele seja removido, utilizando recursos como o arquivo .gitignore, Se ao criar um projeto de Pipeline no Blue Ocean o Jenkinsfile não existir mas for adicionado posteriormente basta utilizar o recurso **'Scan Multibranch Pipeline Now'** na home do projeto; 
 
@@ -435,13 +435,13 @@ git branch development
 É possível confirmar se o CI identificou a nova branch verificando o log no botão abaixo da opção utilizada:
 
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/06.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/06.PNG)
 
 10.6 Após a alteração volte ao Blue Ocean e execute um novo Job na branch master, para isso clique em **'Branchs'** no canto superior direito para acessar a lista das branchs do seu projeto de Pipeline, existirá um job em execução relativo a branch development.
 
 10.5 Para testar a configuração inicie o job a partir da branch master clicando na opção **'Run'** na linha da branch master no Pipeline;
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/07.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/07.PNG)
 
 
 ---
@@ -567,7 +567,7 @@ git push
 
 11.6 Ao final do processo acesse a página do CI na porta 3000 para verificar a aplicação Node rodando em modo de desenvolvimento e finalize a aplicação pleo CI clicando na opção "Proceed";
 
-![alt tag](https://github.com/fiapfullstack/pipelines/raw/master/img-src/08.PNG)
+![alt tag](https://github.com/FabianoCarneiro/pipelines/blob/master/img-src/08.PNG)
 
 11.7 Finalmente faça um novo teste iniciando o Job a partir da branch "Production";
 
