@@ -10,7 +10,7 @@ O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
 
-01. [Requisitos](#Requisitos)
+01. [Requisitos](#1)
 02. [Início](#Início)
 03. [Desbloqueio](#Desbloqueio)
 04. [Pipeline](#Pipeline)
@@ -31,7 +31,7 @@ verificar se o aplicativo é renderizado conforme esperado crianda nosso primeir
 
 ---
 
-## Requisitos <a name="Requisitos"></a>
+## Requisitos <a name="1"></a>
 
 Utilizaremos a arquitetura baseada em containers para instanciar a primeira versão do Jenkins e demonstrar a configuração de um pipeline utilizando o plugin Blue Ocean, este laboratório é baseado na documentação [Build a Node.js and React app with npm ](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#setup-wizard);
 
