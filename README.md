@@ -11,16 +11,16 @@ uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
 
 01. [Requisitos](#1)
-02. [Início](#Início)
-03. [Desbloqueio](#Desbloqueio)
-04. [Pipeline](#Pipeline)
-05. [Sessões](#Sessões)
-06. [Running](#Running)
-07. [Test](#Test)
-08. [Delivery](#Delivery)
-09. [ProjetosMultiBranch](#ProjetosMultiBranch)
-10. [MultiBranchPipeline](#MultiBranchPipeline)
-11. [MultiBranchDeploy](#MultiBranchDeploy)
+02. [Início](#2)
+03. [Desbloqueio](#3)
+04. [Pipeline](#4)
+05. [Sessões](#5)
+06. [Running](#6)
+07. [Test](#7)
+08. [Delivery](#8)
+09. [ProjetosMultiBranch](#9)
+10. [MultiBranchPipeline](#10)
+11. [MultiBranchDeploy](#11)
 
 ---
 
@@ -31,7 +31,7 @@ verificar se o aplicativo é renderizado conforme esperado crianda nosso primeir
 
 ---
 
-## Requisitos <a name="1"></a>
+## 1. Requisitos <a name="1"></a>
 
 Utilizaremos a arquitetura baseada em containers para instanciar a primeira versão do Jenkins e demonstrar a configuração de um pipeline utilizando o plugin Blue Ocean, este laboratório é baseado na documentação [Build a Node.js and React app with npm ](https://www.jenkins.io/doc/tutorials/build-a-node-js-and-react-app-with-npm/#setup-wizard);
 
@@ -39,11 +39,11 @@ Utilizaremos a arquitetura baseada em containers para instanciar a primeira vers
 
 1.2 Instalação do Docker Compose, embora não seja um pré-requisito a infraestrutura de containers construida na documentação foi automatizada para este laboratório utilizando [Overview of Docker Compose](https://docs.docker.com/compose/) este recurso automatiza algumas etapas da configuração com a inicialização dos dcontainers e configuração de rede e volumes, por isso para seguir o passo-a-passo abaixo sua instalação é necessária e [esta detalhada nesse documentação](https://docs.docker.com/compose/install/);
 
-## Alternativa:
+    ## Alternativa:
 
-Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/FiapDevOps/cloud9);
+    Você também pode executar este laboratório utilizando uma instância em núvem ou uma IDE como o Cloud9, opção utilizada neste cenário com base [neste template e instruções de instalação](https://github.com/FiapDevOps/cloud9);
 
-## Início <a name="Início"></a>
+## 2. Início <a name="2"></a>
 
 2.1 Como executarmeos algumas alterações durante o laboratório é necessário que você execute um [Fork deste repositório](https://help.github.com/pt/github/getting-started-with-github/fork-a-repo) para sua conta local no GitHub, utilize um repositório aberto para evitar a configurações de credenciais de acesso no CI.
 
@@ -55,7 +55,7 @@ docker-compose up -d
 
 [![asciicast](https://asciinema.org/a/335882.svg)](https://asciinema.org/a/335882)
 
-## Desbloqueio <a name="Desbloqueio"></a>
+## 3. Desbloqueio <a name="3"></a>
 
 **Liberando o jenkins para uso;**
 
@@ -83,7 +83,7 @@ docker logs jenkins-blueocean
 
 ---
 
-## Pipeline <a name="Pipeline"></a>
+## 4. Pipeline <a name="4"></a>
 
 **Criando o projeto e a integração**
 
@@ -151,7 +151,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 ---
 
-## Sessões <a name="Sessões"></a>
+## 5. Sessões <a name="5"></a>
 
 **A composição bruta de um pipeline em Jenkins**
 
@@ -165,7 +165,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 ---
 
-## Running <a name="Running"></a> 
+## 6. Running <a name="6"></a> 
 
 **Execute o primeiro pipeline do laboratório**
 
@@ -189,7 +189,7 @@ Este fluxo possui um único **stage** chamado Build, e um único agente chamado 
 
 ---
 
-## Test <a name="Test"></a> 
+## 7. Test <a name="7"></a> 
 
 **"Adicionando uma etapa de testes"**
 
@@ -245,7 +245,7 @@ pipeline {
 
 ---
 
-## Delivery <a name="Delivery"></a> 
+## 8. Delivery <a name="8"></a> 
 
 **"Adicionando uma etapa final para entrega"**
 
@@ -307,7 +307,7 @@ pipeline {
 
 ---
 
-# Multibranch Pipeline
+# 9. Multibranch Pipeline <a name="9"></a>
 
 Nesta etapa ampliaremos a configuração do projeto para um modelo com multi branchs no processo de desenvolvimento;
 
@@ -339,7 +339,7 @@ Trabalhar com multiplas brancs permite a implantação de fluxos mais complexos 
 
 ---
 
-## MultiBranchPipeline <a name="MultiBranchPipeline"></a> 
+## 10. MultiBranchPipeline <a name="10"></a> 
 
 **"Adicione etapas de entrega e implantação do seu Pipeline"**
 
@@ -446,7 +446,7 @@ git branch development
 
 ---
 
-## MultiBranchDeploy <a name="MultiBranchDeploy"></a> 
+## 11. MultiBranchDeploy <a name="11"></a> 
 
 **"Etapa final com o deploy da aplicação"**
 
