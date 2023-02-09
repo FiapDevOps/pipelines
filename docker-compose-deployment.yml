@@ -26,11 +26,11 @@ services:
 
   prometheus:
     container_name: prometheus
-    image: prom/prometheus:v2.35.0
+    image: prom/prometheus:v2ß.35.0
     volumes:
       - prometheus_data:/prometheus
-      - .prom_files/prometheus.yml:/etc/prometheus/prometheus.yml
-      - .prom_files/rules.yml:/etc/prometheus/rules.yml
+      - ./prom_files/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prom_files/rules.yml:/etc/prometheus/rules.yml
     ports:
       - 9090:9090
     restart: unless-stopped
