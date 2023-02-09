@@ -10,7 +10,7 @@ O repositório contém um aplicativo Node.js e React simples que gera
 uma página com o conteúdo "Bem-vindo ao React" e com um teste para
 verificar se o aplicativo é renderizado conforme esperado crianda nosso primeiro pipeline.
 
-01. [Requisitos] (#Requisitos)
+01. [Requisitos](#Requisitos)
 02. [Início](#Início)
 03. [Desbloqueio](#Desbloqueio)
 04. [Pipeline](#Pipeline)
