@@ -573,7 +573,4 @@ git push
 
 ---
 
-##### Fiap - MBA Full Stack Developer | DevOps
-profhelder.pereira@fiap.com.br
-
 **Free Software, Hell Yeah!**
