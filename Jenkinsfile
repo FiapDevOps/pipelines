@@ -20,9 +20,7 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-
         stage('Deploy for production') {
-
             steps {
                 sh 'chmod +x ./jenkins/scripts/deployment.sh'
                 sh './jenkins/scripts/deployment.sh'
