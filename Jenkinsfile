@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Deploy for production') {
             when {
-                branch 'production'
+                branch 'release'
             }
             steps {
                 sh 'chmod +x ./jenkins/scripts/deployment.sh'
