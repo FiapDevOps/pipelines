@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import team from './team.jpeg';
 import mba from './MBA.png';
 import './App.css';
 
@@ -9,11 +9,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={mba} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to FIAP 43SCJ</h1>
+          <h1 className="App-title">Welcome to FIAP GTI 155</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+         O time de milhões!
         </p>
+        <img src={team} alt="team" />
       </div>
     );
   }
