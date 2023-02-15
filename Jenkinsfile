@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deploy for production') {
             steps {
-                sh 'chmod +x ./jenkins/scripts/deployment.sh'
+                sh 'chmod +x ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deployment.sh'
                 input message: 'Finished with your production version? (Click "Proceed" to continue)'
                 sh 'chmod +x ./jenkins/scripts/kill.sh'
